@@ -1,13 +1,15 @@
-!/bin/bash
+sudo apt update; sudo apt upgrade
 
-# Open file descriptor (fd) 3 for read/write on a text file.
-exec 3<> poem.txt
+sudo apt install -y apache2 apache2-utils
 
-    # Let's print some text to fd 3
-    echo "Roses are red" >&3
-    echo "Violets are blue" >&3
-    echo "Poems are cute" >&3
-    echo "And so are you" >&3
+sudo chown www-data:www-data /var/www/html/ -R
 
-# Close fd 3
-exec 3>&-
+sudo apt install mariadb-server mariadb-client
+
+sudo mysql_secure_installation
+
+sudo apt install php7.4 libapache2-mod-php7.4 php7.4-mysql php-common php7.4-cli php7.4-common php7.4-json php7.4-opcache php7.4-readline
+
+sudo a2enmod php7.4
+
+sudo systemctl restart apache2
